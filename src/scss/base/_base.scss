@@ -1,0 +1,11 @@
+body {
+    background-color: map-get($app-layout, app-bg);
+    color: map-get($colors, text-primary);
+    font-family: map-get($fonts, montserrat-regularr);
+}
+
+img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,12 @@
+section {
+    background-color: map-get($app-layout, section-bg);
+    max-width: 880px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 45px;
+
+
+    p {
+        margin-top: 0;
+    }
+}
