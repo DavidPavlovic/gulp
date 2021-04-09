@@ -11,5 +11,10 @@ if(headerEle) {
     spanEle.textContent = yperson.name;
 
     titleEle.appendChild(spanEle);
-    
+
+    const myArr = [1,2,3,4,5,6];
+
+    const myNewArr = myArr.map(item => item * 2);
+
+    console.log(myNewArr)
 };

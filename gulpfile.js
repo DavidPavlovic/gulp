@@ -4,11 +4,15 @@ const autoprefixer = require('gulp-autoprefixer');
 const csso = require('gulp-csso');
 const babel = require('gulp-babel');
 const rename = require('gulp-rename');
-const terser = require('gulp-terser');
-const webpack = require('webpack-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const del = require('del');
 const mode = require('gulp-mode')();
+const browserify = require('browserify');
+const babelify = require('babelify');
+const source = require('vinyl-source-stream');
+const buffer = require("vinyl-buffer");
+const uglify = require("gulp-uglify");
+const gulp = require("gulp");
 const browserSync = require('browser-sync').create();
 
 // Clean tasks
@@ -38,25 +42,15 @@ const css = () => {
 }
 // JS task
 const js = () => {
-  return src('src/**/*.js')
-  .pipe(babel({
-    presets: ['@babel/env']
-  }))
-  .pipe(webpack({
-    mode: 'development',
-    devtool: '#inline-source-map'
-  }))
-  .pipe(mode.development(sourcemaps.init({
-    loadMaps: true
-  })))
-  .pipe(rename('main.js'))
-  .pipe(mode.production(terser({
-    output: {
-      comments: false
-    }
-  })))
-  .pipe(mode.development(sourcemaps.write()))
-  .pipe(dest('dist/js'))
+  return browserify('src/js/main.js')
+  .transform('babelify', {presets: ['@babel/preset-env']})
+  .bundle()
+  .pipe(source('bundle.js'))
+  .pipe(buffer())
+  .pipe(mode.development( sourcemaps.init({ loadMaps: true }) ))
+  .pipe(mode.production(uglify()))
+  .pipe(mode.development( sourcemaps.write() ))
+  .pipe(gulp.dest('dist/js/'))
   .pipe(mode.development(browserSync.stream()));
 }
 
