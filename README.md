@@ -16,4 +16,4 @@ npm run build
 
 [//]: # (These are reference links used in the body of this readme and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-[Parcel]: <https://gulpjs.com/>
+[Gulp]: <https://gulpjs.com/>
